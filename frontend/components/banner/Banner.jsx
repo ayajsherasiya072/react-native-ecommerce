@@ -32,7 +32,7 @@ export default Banner;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginTop:10
+    marginTop:10,
   },
   itemContainer: {
     alignItems: 'center',

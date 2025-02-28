@@ -1,8 +1,17 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import React from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { useNavigation } from 'expo-router';
 
 const ProductCard = ({product}) => {
+    const navigation=useNavigation()
+
+    const handledetails=(id)=>{
+        navigation.navigate("productdetail",{_id:id})
+    }
+    const handleaddtocart=()=>{
+        alert("add to cart")
+    }
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -11,10 +20,10 @@ const ProductCard = ({product}) => {
         <Text style={styles.description}>{product.description.substring(0,30)}...more</Text>
         <Text style={styles.price}>{product.price}</Text>
         <View style={styles.buttoncontainer}>
-            <TouchableOpacity style={styles.btn1}>
-                <Text>Details</Text>
+            <TouchableOpacity style={styles.btn1} onPress={()=>handledetails(product._id)}>
+                <Text style={styles.btn1text}>Details</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn2}>
+            <TouchableOpacity style={styles.btncart} onPress={handleaddtocart}>
                 <FontAwesome5 name="shopping-cart" size={16} color="white" />
             </TouchableOpacity>
         </View>
@@ -50,7 +59,8 @@ const styles = StyleSheet.create({
     },
     buttoncontainer:{
         flexDirection:'row',
-        gap:10
+        gap:10,
+        width:"100%"
     },
     title:{
         fontSize:18,
@@ -62,20 +72,25 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
         marginBottom:5,
     },
-    btn2:{
+    btncart:{
         backgroundColor:"#004aab",
-        width:100,
-        alignItems:"center",
-        justifyContent:"center",
-        paddingVertical:5,
-        borderRadius:5
-    },
-    btn1:{
-        backgroundColor:"#004aab",
-        width:100,
         alignItems:"center",
         justifyContent:"center",
         paddingVertical:5,
         borderRadius:5,
+        flex:1
+    },
+    btn1:{
+        borderWidth:1,
+        borderColor:"#004aab",
+        alignItems:"center",
+        justifyContent:"center",
+        paddingVertical:5,
+        borderRadius:5,
+        flex:1
+    },
+    btn1text:{
+        color:"#004aab",
+        fontWeight:500
     }
 })
